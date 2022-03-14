@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react";
 import "./Rentals.css";
 
 export const Rentals = () => {
+
+    const [showdata, setShowdata] = useState([]);
+    
+    const showDetails = () => {
+        try {
+          fetch("http://localhost:8080/house")
+            .then((res) => res.json())
+            .then((data) => {
+              setShowdata(data);
+            });
+        } catch (e) {
+          console.log(e.message);
+        }
+      };
+    
+      useEffect(() => {
+        showDetails();
+      }, []);
+    
   return (
     <div className="rentalContainer">
       <div className="sortingButtons">
